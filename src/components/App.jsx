@@ -1,30 +1,28 @@
-import { StyledNavLink } from './App.styled'
-const styleApp = {
-  height: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: 40,
-  color: '#010101',
-};
+
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { StyledNavLink } from './App.styled';
+import { HomePage } from '../pages/HomePage/HomePage';
+import { MoviesPage } from '../pages/MoviesPage/MoviesPage'
+
 
 export const App = () => {
+  const [trendingList, setTrendingList] = useState([]);
+
   return (
-    <div style={styleApp}>
+    <div>
       <header>
         <nav>
           <StyledNavLink to="/" end>
             Home
           </StyledNavLink>
-          <StyledNavLink to="/about">Movies</StyledNavLink>
-          <StyledNavLink to="/products">Products</StyledNavLink>
+          <StyledNavLink to="/movies">Movies</StyledNavLink>
         </nav>
       </header>
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-      </Routes> */}
+      <Routes>
+        <Route path="/" element={<HomePage trendingList={trendingList} setTrendingList={setTrendingList} />} />
+        <Route path="/movies" element={<MoviesPage />} />
+      </Routes>
     </div>
   );
 };
