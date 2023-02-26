@@ -5,22 +5,22 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import {getSearchFilmList} from '../../services/themoviedbApi';
 
 
-export const MoviesPage = ({trendingList, setTrendingList}) => {
-    const [showSearch, setShowSearch] = useState(true);
+export const SearchMoviesPage = () => {
+    const [showSearch, ] = useState(true);
     const [searchRequest, setSearchRequest] = useState('')
     const [searchList, setSearchList] = useState([]);
     const [error, setError] = useState(null);
-    console.log('searchRequest 0 >>', searchRequest);
+    // console.log('searchRequest 0 >>', searchRequest);
 
     useEffect(() => {
-      console.log('searchRequest 1 >>', searchRequest);
+      // console.log('searchRequest 1 >>', searchRequest);
       if (searchRequest === '') return;
         const runRequest = async () => {
           try {
             // setIsLoading(true);
-            console.log('searchRequest 2 >>', searchRequest);
+            // console.log('searchRequest 2 >>', searchRequest);
             const data = await getSearchFilmList(searchRequest);
-            console.log('data >>', data);
+            // console.log('data >>', data);
             setSearchList(data);
             setError(null);
           } catch (err) {

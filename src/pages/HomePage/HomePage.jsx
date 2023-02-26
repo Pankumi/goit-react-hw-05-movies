@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { getPopularFilmList } from '../../services/themoviedbApi';
 
-export const HomePage = ({ trendingList, setTrendingList }) => {
+export const HomePage = () => {
+  const [trendingList, setTrendingList] = useState([]);
   const [error, setError] = useState(null);
   // console.log(setTrendingList);
 

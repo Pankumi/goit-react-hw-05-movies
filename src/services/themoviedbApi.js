@@ -17,13 +17,24 @@ export const getPopularFilmList = async page => {
   return response.data;
 };
 
-// https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=<<query>>&page=1&include_adult=false
+
 export const getSearchFilmList = async (keyWord) => {
-  console.log('APP >>', keyWord);
+  // console.log('APP >>', keyWord);
   const response = await axios.get(`${BASE_URL}/search/movie`, {
     params: {
       api_key: API_KEY,
       query: keyWord,
+    },
+  });
+  return response.data;
+};
+
+// https://api.themoviedb.org/3/movie/123456789?api_key=a95ff59f8d48ac961c2785119723c43c
+export const getFilmID = async (movieId) => {
+  console.log('APP >>', movieId);
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}`, {
+    params: {
+      api_key: API_KEY,
     },
   });
   return response.data;

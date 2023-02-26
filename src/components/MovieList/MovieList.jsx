@@ -1,15 +1,16 @@
-// import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export const MovieList = ({ movies }) => {
-  // console.log('list', trendingList.results );
   let list = movies.results;
+  console.log('list', list );
+
   return (
     <ul>
       {list.map(el => {
         const { id, title } = el;
         return (
           <li key={id}>
-            <p>{title}</p>
+            <Link to={`/movies/${id}`}><p>{title}</p></Link>
           </li>
         );
       })}

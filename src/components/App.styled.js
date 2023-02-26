@@ -8,10 +8,10 @@ border-bottom: 2px solid transparent;
 
 padding: 15px;
 transition: all .3s;
-color: black;
+color: aliceblue;
 &.active {
-  color: blue;
-  border-bottom: 2px solid blue;
+  color: #0059ff;
+  border-bottom: 2px solid #0059ff;
 }
 `;
 

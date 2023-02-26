@@ -1,27 +1,28 @@
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { StyledNavLink } from './App.styled';
 import { HomePage } from '../pages/HomePage/HomePage';
-import { MoviesPage } from '../pages/MoviesPage/MoviesPage'
+import { SearchMoviesPage } from '../pages/SearchMoviesPage/SearchMoviesPage'
+import { MoviePage } from '../pages/MoviePage/MoviePage'
 
 
 export const App = () => {
-  const [trendingList, setTrendingList] = useState([]);
+  // const [movieItem, setMovieItem] = useState(null);
 
   return (
     <div>
       <header>
         <nav>
-          <StyledNavLink to="/" end>
-            Home
-          </StyledNavLink>
+          <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/movies">Movies</StyledNavLink>
         </nav>
       </header>
+
       <Routes>
-        <Route path="/" element={<HomePage trendingList={trendingList} setTrendingList={setTrendingList} />} />
-        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<SearchMoviesPage />} />
+        <Route path="/movies/:movieiD" element={<MoviePage />} />
       </Routes>
     </div>
   );
