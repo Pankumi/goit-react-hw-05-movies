@@ -35,9 +35,9 @@ export const SearchMoviesPage = () => {
 
   return (
     <div>
-        {showSearch && <SearchBar newSearch={setSearchRequest} />}
+        {Boolean(showSearch) && <SearchBar newSearch={setSearchRequest} />}
         {searchList.length !== 0 && <MovieList movies={searchList} />}
-        {error && <p>Oops, some arror occured... Massage: {error}</p>}
+        {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
     </div>
   );
 };

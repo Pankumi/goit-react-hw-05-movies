@@ -28,7 +28,7 @@ export const HomePage = () => {
     <div>
       <h1>Trending Today</h1>
       {trendingList.length !== 0 && <MovieList movies={trendingList} />}
-      {error && <p>Oops, some arror occured... Massage: {error}</p>}
+      {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
     </div>
   );
 };
