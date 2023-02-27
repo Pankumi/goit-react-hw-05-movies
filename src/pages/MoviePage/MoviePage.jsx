@@ -33,12 +33,14 @@ export const MoviePage = () => {
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
       {Boolean(filmInfo) && (
         <div>
+          <NavLink to="/" ><button type='button' > ← Go back</button></NavLink>
+          
           <div>
-            <img
+            {Boolean(filmInfo.poster_path) && <img
               src={`https://image.tmdb.org/t/p/w500${filmInfo.poster_path}`}
               alt={filmInfo.title}
               width="300px"
-            />
+            />}
             <div>
               <p>{filmInfo.title}</p>
               <p>Uset Score: {Math.round(filmInfo.popularity)}%</p>
@@ -63,7 +65,6 @@ export const MoviePage = () => {
           <Routes>
             <Route path='cast' element={<MovieCastPage />} />
             <Route path='revievs' element={<MovieReviewsPage />} />
-            
           </Routes>
         </div>
       )}
