@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFilmIdReviews } from '../../services/themoviedbApi';
+import { Reviews } from '../../components/Reviews/Reviews'
 
 export const MovieReviewsPage = () => {
-  const [serviceResponse, setServiceResponse] = useState(null);
+  const [serviceResponse, setServiceResponse] = useState([]);
   const [error, setError] = useState(null);
   const { movieiD } = useParams();
 
@@ -13,7 +14,6 @@ export const MovieReviewsPage = () => {
       try {
         // setIsLoading(true);
         const {results} = await getFilmIdReviews(movieiD);
-          console.log('results Reviews >>', results);
 
         setServiceResponse(results);
         setError(null);
@@ -30,8 +30,8 @@ export const MovieReviewsPage = () => {
   return (
     <>
       {Boolean(error) && <p> Oops, some arror occured... Massage: {error}</p>}
-      {serviceResponse.length ===0 && <p>We don`t have any reviews for this movie.</p>}
-      {/* {Boolean(serviceResponse) && <p>{serviceResponse}</p>} */}
+      {serviceResponse.length === 0 && <p>We don`t have any reviews for this movie.</p>}
+      {serviceResponse.length > 0 && <Reviews serviceResponse={serviceResponse} />}
     </>
   );
 };
