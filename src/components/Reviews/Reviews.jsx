@@ -1,9 +1,6 @@
-
 // import css from './SearchBar.module.css';
 
-
 export const Reviews = ({serviceResponse}) => {
-  console.log('results Reviews >>', serviceResponse);
 
   return (
     <ul>
