@@ -15,8 +15,7 @@ export const getPopularFilmList = async page => {
   return response.data;
 };
 
-export const getSearchFilmList = async (keyWord) => {
-  // console.log('APP >>', keyWord);
+export const getSearchFilmList = async keyWord => {
   const response = await axios.get(`${BASE_URL}/search/movie`, {
     params: {
       api_key: API_KEY,
@@ -26,9 +25,7 @@ export const getSearchFilmList = async (keyWord) => {
   return response.data;
 };
 
-// https://api.themoviedb.org/3/movie/123456789?api_key=a95ff59f8d48ac961c2785119723c43c
-export const getFilmID = async (movieId) => {
-  // console.log('APP >>', movieId);
+export const getFilmID = async movieId => {
   const response = await axios.get(`${BASE_URL}/movie/${movieId}`, {
     params: {
       api_key: API_KEY,
@@ -37,9 +34,7 @@ export const getFilmID = async (movieId) => {
   return response.data;
 };
 
-// https://api.themoviedb.org/3/movie/777777/credits?api_key=<<api_key>>&language=en-US
-export const getFilmIdCredits = async (movieId) => {
-  // console.log('APP >>', movieId);
+export const getFilmIdCredits = async movieId => {
   const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
     params: {
       api_key: API_KEY,
@@ -49,9 +44,7 @@ export const getFilmIdCredits = async (movieId) => {
   return response.data;
 };
 
-// https://api.themoviedb.org/3/movie/77777777/reviews?api_key=<<api_key>>&language=en-US&page=1
 export const getFilmIdReviews = async (movieId, page) => {
-  // console.log('APP >>', movieId);
   const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews`, {
     params: {
       api_key: API_KEY,
@@ -61,4 +54,3 @@ export const getFilmIdReviews = async (movieId, page) => {
   });
   return response.data;
 };
-

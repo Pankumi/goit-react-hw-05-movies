@@ -3,7 +3,7 @@ import { useParams, NavLink, Routes, Route } from 'react-router-dom';
 import { getFilmID } from '../../services/themoviedbApi';
 import { MovieCastPage } from '../MovieCastPage/MovieCastPage';
 import { MovieReviewsPage } from '../MovieReviewsPage/MovieReviewsPage';
-import { Loader } from '../../components/Loader/Loader'
+import { Loader } from '../../components/Loader/Loader';
 import css from './MovieP.module.css';
 
 export const MoviePage = () => {
@@ -32,7 +32,7 @@ export const MoviePage = () => {
 
   return (
     <>
-    {isLoading && <Loader />}
+      {isLoading && <Loader />}
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
       {Boolean(filmInfo) && (
         <div>
@@ -63,19 +63,24 @@ export const MoviePage = () => {
             <p>Additional Information</p>
             <ul>
               <li>
-                <NavLink to="cast"> <p>Cast</p> </NavLink>
+                <NavLink to="cast">
+                  {' '}
+                  <p>Cast</p>{' '}
+                </NavLink>
               </li>
               <li>
-                <NavLink to="revievs"> <p>Revievs</p> </NavLink>
+                <NavLink to="revievs">
+                  {' '}
+                  <p>Revievs</p>{' '}
+                </NavLink>
               </li>
             </ul>
           </div>
 
-            <Routes>
-              <Route path="cast" element={<MovieCastPage />} />
-              <Route path="revievs" element={<MovieReviewsPage />} />
-            </Routes>
-
+          <Routes>
+            <Route path="cast" element={<MovieCastPage />} />
+            <Route path="revievs" element={<MovieReviewsPage />} />
+          </Routes>
         </div>
       )}
     </>

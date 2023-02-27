@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { getPopularFilmList } from '../../services/themoviedbApi';
-import { Loader } from '../../components/Loader/Loader'
+import { Loader } from '../../components/Loader/Loader';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);

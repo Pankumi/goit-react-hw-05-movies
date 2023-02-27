@@ -31,7 +31,7 @@ export const SearchMoviesPage = () => {
 
   return (
     <div>
-    {isLoading && <Loader />}
+      {isLoading && <Loader />}
       {Boolean(showSearch) && <SearchBar newSearch={setSearchRequest} />}
       {searchList.length !== 0 && <MovieList movies={searchList} />}
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}

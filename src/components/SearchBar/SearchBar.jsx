@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import css from './SearchBar.module.css';
 
-
-export const SearchBar = ({newSearch}) => {
+export const SearchBar = ({ newSearch }) => {
   const [search, setSearch] = useState('');
 
   const handleChange = evt => {
@@ -12,9 +11,9 @@ export const SearchBar = ({newSearch}) => {
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    if (search.length < 1) return
-    
-    newSearch(search); // *************
+    if (search.length < 1) return;
+
+    newSearch(search);
     reset();
   };
 
@@ -35,11 +34,12 @@ export const SearchBar = ({newSearch}) => {
           value={search}
           onChange={handleChange}
         />
-        <button className={css.SearchForm_button} type="submit">Search</button>
+        <button className={css.SearchForm_button} type="submit">
+          Search
+        </button>
       </form>
     </section>
   );
 };
-
 
 export default SearchBar;

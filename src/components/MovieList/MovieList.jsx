@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 export const MovieList = ({ movies }) => {
   let list = movies.results;
-  console.log('list', list );
 
   return (
     <ul>
@@ -10,7 +9,9 @@ export const MovieList = ({ movies }) => {
         const { id, title } = el;
         return (
           <li key={id}>
-            <Link to={`/movies/${id}`}><p>{title}</p></Link>
+            <Link to={`/movies/${id}`}>
+              <p>{title}</p>
+            </Link>
           </li>
         );
       })}
