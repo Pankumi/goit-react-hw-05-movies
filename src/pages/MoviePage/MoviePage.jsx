@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, NavLink, Routes, Route } from 'react-router-dom';
 import { getFilmID } from '../../services/themoviedbApi';
 import { MovieCastPage } from '../MovieCastPage/MovieCastPage';
-import { MovieReviewsPage } from '../MovieReviewsPage/MovieReviewsPage'
+import { MovieReviewsPage } from '../MovieReviewsPage/MovieReviewsPage';
+import { Loader } from '../../components/Loader/Loader'
+import css from './MovieP.module.css';
 
 export const MoviePage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [filmInfo, setFilmInfo] = useState(null);
   const [error, setError] = useState(null);
   const { movieiD } = useParams();
@@ -13,16 +16,15 @@ export const MoviePage = () => {
     if (!Boolean(movieiD)) return;
     const runRequest = async () => {
       try {
-        // setIsLoading(true);
+        setIsLoading(true);
         const data = await getFilmID(movieiD);
-
         setFilmInfo(data);
         setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
     runRequest();
@@ -30,17 +32,23 @@ export const MoviePage = () => {
 
   return (
     <>
+    {isLoading && <Loader />}
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
       {Boolean(filmInfo) && (
         <div>
-          <NavLink to="/" ><button type='button' > ← Go back</button></NavLink>
-          
+          <NavLink to="/">
+            <button type="button"> ← Go back</button>
+          </NavLink>
+
           <div>
-            {Boolean(filmInfo.poster_path) && <img
-              src={`https://image.tmdb.org/t/p/w500${filmInfo.poster_path}`}
-              alt={filmInfo.title}
-              width="300px"
-            />}
+            {Boolean(filmInfo.poster_path) && (
+              <img
+                className={css.Poster}
+                src={`https://image.tmdb.org/t/p/w500${filmInfo.poster_path}`}
+                alt={filmInfo.title}
+                width="300px"
+              />
+            )}
             <div>
               <p>{filmInfo.title}</p>
               <p>Uset Score: {Math.round(filmInfo.popularity)}%</p>
@@ -51,21 +59,23 @@ export const MoviePage = () => {
             </div>
           </div>
 
-          <div>
+          <div className={css.AdditionalInfo}>
             <p>Additional Information</p>
             <ul>
               <li>
-                <NavLink to="cast">Cast</NavLink>
+                <NavLink to="cast"> <p>Cast</p> </NavLink>
               </li>
               <li>
-                <NavLink to="revievs">Revievs</NavLink>
+                <NavLink to="revievs"> <p>Revievs</p> </NavLink>
               </li>
             </ul>
           </div>
-          <Routes>
-            <Route path='cast' element={<MovieCastPage />} />
-            <Route path='revievs' element={<MovieReviewsPage />} />
-          </Routes>
+
+            <Routes>
+              <Route path="cast" element={<MovieCastPage />} />
+              <Route path="revievs" element={<MovieReviewsPage />} />
+            </Routes>
+
         </div>
       )}
     </>

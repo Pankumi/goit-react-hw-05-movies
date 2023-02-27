@@ -1,43 +1,40 @@
-
 import React, { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import {getSearchFilmList} from '../../services/themoviedbApi';
-
+import { getSearchFilmList } from '../../services/themoviedbApi';
+import { Loader } from '../../components/Loader/Loader';
 
 export const SearchMoviesPage = () => {
-    const [showSearch, ] = useState(true);
-    const [searchRequest, setSearchRequest] = useState('')
-    const [searchList, setSearchList] = useState([]);
-    const [error, setError] = useState(null);
-    // console.log('searchRequest 0 >>', searchRequest);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSearch] = useState(true);
+  const [searchRequest, setSearchRequest] = useState('');
+  const [searchList, setSearchList] = useState([]);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-      // console.log('searchRequest 1 >>', searchRequest);
-      if (searchRequest === '') return;
-        const runRequest = async () => {
-          try {
-            // setIsLoading(true);
-            // console.log('searchRequest 2 >>', searchRequest);
-            const data = await getSearchFilmList(searchRequest);
-            // console.log('data >>', data);
-            setSearchList(data);
-            setError(null);
-          } catch (err) {
-            console.log('err >> ', err);
-            setError(err.message);
-          } finally {
-            // setIsLoading(false);
-          }
-        };
-        runRequest();
-      }, [searchRequest] );
+  useEffect(() => {
+    if (searchRequest === '') return;
+    const runRequest = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getSearchFilmList(searchRequest);
+        setSearchList(data);
+        setError(null);
+      } catch (err) {
+        console.log('err >> ', err);
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    runRequest();
+  }, [searchRequest]);
 
   return (
     <div>
-        {Boolean(showSearch) && <SearchBar newSearch={setSearchRequest} />}
-        {searchList.length !== 0 && <MovieList movies={searchList} />}
-        {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
+    {isLoading && <Loader />}
+      {Boolean(showSearch) && <SearchBar newSearch={setSearchRequest} />}
+      {searchList.length !== 0 && <MovieList movies={searchList} />}
+      {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
     </div>
   );
 };
