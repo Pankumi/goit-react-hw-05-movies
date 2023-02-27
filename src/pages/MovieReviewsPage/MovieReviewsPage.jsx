@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getFilmIdCredits } from '../../services/themoviedbApi';
+import { getFilmIdReviews } from '../../services/themoviedbApi';
 
-export const MovieCastPage = () => {
+export const MovieReviewsPage = () => {
   const [serviceResponse, setServiceResponse] = useState(null);
   const [error, setError] = useState(null);
   const { movieiD } = useParams();
@@ -11,10 +12,10 @@ export const MovieCastPage = () => {
     const runRequest = async () => {
       try {
         // setIsLoading(true);
-        const {cast} = await getFilmIdCredits(movieiD);
-          // console.log('data CastPage >>', data);
+        const {results} = await getFilmIdReviews(movieiD);
+          console.log('results Reviews >>', results);
 
-        setServiceResponse(cast);
+        setServiceResponse(results);
         setError(null);
       } catch (err) {
         console.log('err >> ', err);
@@ -29,10 +30,10 @@ export const MovieCastPage = () => {
   return (
     <>
       {Boolean(error) && <p> Oops, some arror occured... Massage: {error}</p>}
-      {serviceResponse.length ===0 && <p>We don`t have any cast for this movie.</p>}
+      {serviceResponse.length ===0 && <p>We don`t have any reviews for this movie.</p>}
       {/* {Boolean(serviceResponse) && <p>{serviceResponse}</p>} */}
     </>
   );
 };
 
-export default MovieCastPage;
+export default MovieReviewsPage;

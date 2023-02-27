@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, NavLink, Routes, Route } from 'react-router-dom';
 import { getFilmID } from '../../services/themoviedbApi';
 import { MovieCastPage } from '../MovieCastPage/MovieCastPage';
+import { MovieReviewsPage } from '../MovieReviewsPage/MovieReviewsPage'
 
 export const MoviePage = () => {
   const [filmInfo, setFilmInfo] = useState(null);
@@ -61,6 +62,8 @@ export const MoviePage = () => {
           </div>
           <Routes>
             <Route path='cast' element={<MovieCastPage />} />
+            <Route path='revievs' element={<MovieReviewsPage />} />
+            
           </Routes>
         </div>
       )}
