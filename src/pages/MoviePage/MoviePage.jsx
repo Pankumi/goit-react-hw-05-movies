@@ -13,13 +13,14 @@ export const MoviePage = () => {
   const { movieiD } = useParams();
 
   useEffect(() => {
+    setFilmInfo(null);
+    setError(null);
     if (!Boolean(movieiD)) return;
     const runRequest = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const data = await getFilmID(movieiD);
         setFilmInfo(data);
-        setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);

@@ -11,12 +11,13 @@ export const MovieReviewsPage = () => {
   const { movieiD } = useParams();
 
   useEffect(() => {
+    setServiceResponse([]);
+    setError(null);
     const runRequest = async () => {
       try {
         setIsLoading(true);
         const { results } = await getFilmIdReviews(movieiD);
         setServiceResponse(results);
-        setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);

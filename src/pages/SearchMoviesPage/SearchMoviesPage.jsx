@@ -6,19 +6,19 @@ import { Loader } from '../../components/Loader/Loader';
 
 export const SearchMoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showSearch] = useState(true);
   const [searchRequest, setSearchRequest] = useState('');
   const [searchList, setSearchList] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setSearchList([]);
+    setError(null);
     if (searchRequest === '') return;
     const runRequest = async () => {
       try {
         setIsLoading(true);
         const data = await getSearchFilmList(searchRequest);
         setSearchList(data);
-        setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);
@@ -32,7 +32,7 @@ export const SearchMoviesPage = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {Boolean(showSearch) && <SearchBar newSearch={setSearchRequest} />}
+      <SearchBar newSearch={setSearchRequest} />
       {searchList.length !== 0 && <MovieList movies={searchList} />}
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
     </div>

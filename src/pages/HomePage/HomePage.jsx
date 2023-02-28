@@ -10,11 +10,12 @@ export const HomePage = () => {
 
   useEffect(() => {
     const runRequest = async () => {
+      setTrendingList([]);
+      setError(null);
       try {
         setIsLoading(true);
         const data = await getPopularFilmList();
         setTrendingList(data);
-        setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);

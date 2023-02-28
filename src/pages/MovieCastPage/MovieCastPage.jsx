@@ -12,11 +12,12 @@ export const MovieCastPage = () => {
 
   useEffect(() => {
     const runRequest = async () => {
+      setServiceResponse([]);
+      setError(null);
       try {
         setIsLoading(true);
         const { cast } = await getFilmIdCredits(movieiD);
         setServiceResponse(cast);
-        setError(null);
       } catch (err) {
         console.log('err >> ', err);
         setError(err.message);
