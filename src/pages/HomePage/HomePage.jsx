@@ -24,7 +24,7 @@ export const HomePage = () => {
       }
     };
     runRequest();
-  }, [setTrendingList]);
+  }, []);
 
   return (
     <div>

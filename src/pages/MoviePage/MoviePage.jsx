@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink, Routes, Route } from 'react-router-dom';
+import { useParams, NavLink, Outlet } from 'react-router-dom';
 import { getFilmID } from '../../services/themoviedbApi';
-import { MovieCastPage } from '../MovieCastPage/MovieCastPage';
-import { MovieReviewsPage } from '../MovieReviewsPage/MovieReviewsPage';
 import { Loader } from '../../components/Loader/Loader';
 import css from './MovieP.module.css';
 
@@ -77,11 +75,7 @@ export const MoviePage = () => {
               </li>
             </ul>
           </div>
-
-          <Routes>
-            <Route path="cast" element={<MovieCastPage />} />
-            <Route path="revievs" element={<MovieReviewsPage />} />
-          </Routes>
+          <Outlet/>
         </div>
       )}
     </>

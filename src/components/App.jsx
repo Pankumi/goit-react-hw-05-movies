@@ -1,27 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
+import { SharedLayoutPage } from '../pages/SharedLayoutPage/SharedLayoutPage';
+
 import { HomePage } from '../pages/HomePage/HomePage';
 import { SearchMoviesPage } from '../pages/SearchMoviesPage/SearchMoviesPage';
 import { MoviePage } from '../pages/MoviePage/MoviePage';
-import css from './App.module.css';
-import { StyledNavLink } from './App.styled';
+import { MovieCastPage } from '../pages/MovieCastPage/MovieCastPage';
+import { MovieReviewsPage } from '../pages/MovieReviewsPage/MovieReviewsPage';
 
 export const App = () => {
   return (
-    <div>
-      <header className={css.Header}>
-        <nav>
-          <StyledNavLink to="/">Home</StyledNavLink>
-          <StyledNavLink to="/movies">Movies</StyledNavLink>
-        </nav>
-      </header>
-
-      <div className={css.StyledRoute}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movies" element={<SearchMoviesPage />} />
-          <Route path="/movies/:movieiD/*" element={<MoviePage />} />
-        </Routes>
-      </div>
-    </div>
+    <>
+    <Routes>
+      <Route path="/" element={<SharedLayoutPage />}>
+        <Route index element={<HomePage />} />
+        <Route path="movies" element={<SearchMoviesPage />} />
+        <Route path="movies/:movieiD/" element={<MoviePage />}>
+          <Route path="cast" element={<MovieCastPage />} />
+          <Route path="revievs" element={<MovieReviewsPage />} />
+        </Route>
+      </Route>
+    </Routes>
+    </>
   );
 };
