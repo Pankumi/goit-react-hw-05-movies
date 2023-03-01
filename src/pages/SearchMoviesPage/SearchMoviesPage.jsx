@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { getSearchFilmList } from '../../services/themoviedbApi';
@@ -13,10 +13,13 @@ export const SearchMoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const MyQuery = searchParams.get('query');  // виймаю пошуковий запит з адресної строки
 
+  const location = useLocation();
+  console.log('SearchMoviesPage location >>', location);
+
   useEffect(() => {
     setSearchList([]);
     setError(null);
-    if (MyQuery === '') return;
+    if (MyQuery === null) return;
     const runRequest = async () => {
       try {
         setIsLoading(true);
@@ -36,8 +39,7 @@ export const SearchMoviesPage = () => {
     <div>
       {isLoading && <Loader />}
       <SearchBar setSearchParams={setSearchParams} defaultValue={MyQuery} />
-      {/* <SearchBar newSearch={setSearchRequest} /> */}
-      {searchList.length !== 0 && <MovieList movies={searchList} />}
+      {searchList.length !== 0 && <MovieList movies={searchList} location={location} />}
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
     </div>
   );

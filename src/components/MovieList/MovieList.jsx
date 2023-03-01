@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const MovieList = ({ movies }) => {
+export const MovieList = ({ movies, location }) => {
   let list = movies.results;
 
   return (
@@ -9,7 +9,7 @@ export const MovieList = ({ movies }) => {
         const { id, title } = el;
         return (
           <li key={id}>
-            <Link to={`/movies/${id}`}>
+            <Link state={{from: location}} to={`/movies/${id}`}>
               <p>{title}</p>
             </Link>
           </li>

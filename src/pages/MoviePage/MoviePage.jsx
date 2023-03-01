@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink, Outlet } from 'react-router-dom';
+import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { getFilmID } from '../../services/themoviedbApi';
 import { Loader } from '../../components/Loader/Loader';
 import css from './MovieP.module.css';
@@ -9,6 +9,9 @@ export const MoviePage = () => {
   const [filmInfo, setFilmInfo] = useState(null);
   const [error, setError] = useState(null);
   const { movieiD } = useParams();
+
+  const location = useLocation();
+  console.log('MoviePage location >>', location);
 
   useEffect(() => {
     setFilmInfo(null);
@@ -35,7 +38,7 @@ export const MoviePage = () => {
       {Boolean(error) && <p>Oops, some arror occured... Massage: {error}</p>}
       {Boolean(filmInfo) && (
         <div>
-          <NavLink to="/">
+          <NavLink to={location.state?.from ?? '/'}>
             <button type="button"> ← Go back</button>
           </NavLink>
 
@@ -62,13 +65,13 @@ export const MoviePage = () => {
             <p>Additional Information</p>
             <ul>
               <li>
-                <NavLink to="cast">
+                <NavLink to="cast" state={{from: location.state?.from ?? '/'}} >
                   {' '}
                   <p>Cast</p>{' '}
                 </NavLink>
               </li>
               <li>
-                <NavLink to="revievs">
+                <NavLink to="revievs" state={{from: location.state?.from ?? '/'}} >
                   {' '}
                   <p>Revievs</p>{' '}
                 </NavLink>
