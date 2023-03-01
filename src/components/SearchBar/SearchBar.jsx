@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import css from './SearchBar.module.css';
 
-export const SearchBar = ({ newSearch }) => {
-  const [search, setSearch] = useState('');
+export const SearchBar = ({ setSearchParams, defaultValue }) => {
+  const [searchValue, setSearchValue] = useState('');
 
   const handleChange = evt => {
-    setSearch(evt.target.value);
+    setSearchValue(evt.target.value);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    if (search.length < 1) return;
-
-    newSearch(search);
+    setSearchParams({ query: searchValue });
     reset();
   };
 
   const reset = () => {
-    setSearch('');
+    setSearchValue('');
   };
 
   return (
@@ -30,9 +28,11 @@ export const SearchBar = ({ newSearch }) => {
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
-          name="search"
-          value={search}
+          name="searchValue"
+          value={searchValue}
+          defaultValue={defaultValue} // (зразок) не працює разом з value, щоб працювало треба переписати useState на useRef (21.02.23 0:45)
           onChange={handleChange}
+          required
         />
         <button className={css.SearchForm_button} type="submit">
           Search
