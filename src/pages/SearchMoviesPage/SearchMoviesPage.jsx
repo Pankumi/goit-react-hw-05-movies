@@ -44,3 +44,4 @@ export const SearchMoviesPage = () => {
     </div>
   );
 };
+export default SearchMoviesPage;
